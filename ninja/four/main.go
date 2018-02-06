@@ -18,6 +18,7 @@ func main() {
 	}
 
 	exerciseOne()
+	exerciseTwo()
 }
 
 func exerciseOne() {
@@ -27,6 +28,15 @@ func exerciseOne() {
 		fmt.Printf("Position: %d - Value: %d, Type: %T\n", i, v, v)
 	}
 	fmt.Printf("Type of variable is: %T\n", intArray)
+}
+
+func exerciseTwo() {
+	intSlice := []int{12, 13, 14, 16, 28, 17, 38, 56, 23, 56}
+
+	for i, v := range intSlice {
+		fmt.Printf("Position: %d, Value: %d, Type: %T\n", i, v, v)
+	}
+	fmt.Printf("Type of variable is: %T\n", intSlice)
 }
 
 // That's All Folks !!
