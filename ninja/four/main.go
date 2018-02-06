@@ -31,12 +31,19 @@ func exerciseOne() {
 }
 
 func exerciseTwo() {
-	intSlice := []int{12, 13, 14, 16, 28, 17, 38, 56, 23, 56}
+	intSlice := []int{12, 13, 14, 16, 28, 17, 38, 56, 23, 77}
 
 	for i, v := range intSlice {
 		fmt.Printf("Position: %d, Value: %d, Type: %T\n", i, v, v)
 	}
 	fmt.Printf("Type of variable is: %T\n", intSlice)
+
+	fmt.Println(intSlice)
+	fmt.Println(intSlice[3:8])
+	fmt.Println(intSlice[5:])
+	fmt.Println(intSlice[:5])
+	fmt.Println(intSlice[2:7])
+	fmt.Println(intSlice[1:6])
 }
 
 // That's All Folks !!
