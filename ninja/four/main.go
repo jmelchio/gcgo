@@ -20,6 +20,7 @@ func main() {
 	exerciseOne()
 	exerciseTwo()
 	exerciseFour()
+	exerciseFive()
 }
 
 func exerciseOne() {
@@ -56,6 +57,12 @@ func exerciseFour() {
 	y := []int{56, 57, 58, 59, 60}
 	x = append(x, y...)
 	fmt.Println(x)
+}
+
+func exerciseFive() {
+	x := []int{42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+	y := append(x[:3], x[6:]...)
+	fmt.Println(y)
 }
 
 // That's All Folks !!
