@@ -21,6 +21,8 @@ func main() {
 	exerciseTwo()
 	exerciseFour()
 	exerciseFive()
+	exerciseSix()
+	exerciseSeven()
 }
 
 func exerciseOne() {
@@ -63,6 +65,36 @@ func exerciseFive() {
 	x := []int{42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
 	y := append(x[:3], x[6:]...)
 	fmt.Println(y)
+}
+
+func exerciseSix() {
+	// not really according to exercise but it's a good experiment
+	x := make([]string, 50, 55)
+	fmt.Printf("Slice capacity is %d and length is %d\n", cap(x), len(x))
+	x = append(x, `Alabama`, `Alaska`, `Arizona`, `Arkansas`, `California`, `Colorado`,
+		`Connecticut`, `Delaware`, `Florida`, `Georgia`, `Hawaii`, `Idaho`, `Illinois`,
+		`Indiana`, `Iowa`, `Kansas`, `Kentucky`, `Louisiana`, `Maine`, `Maryland`,
+		`Massachusetts`, `Michigan`, `Minnesota`, `Mississippi`, `Missouri`, `Montana`,
+		`Nebraska`, `Nevada`, `New Hampshire`, `New Jersey`, `New Mexico`, `New York`,
+		`North Carolina`, `North Dakota`, `Ohio`, `Oklahoma`, `Oregon`, `Pennsylvania`,
+		`Rhode Island`, `South Carolina`, `South Dakota`, `Tennessee`, `Texas`, `Utah`,
+		`Vermont`, `Virginia`, `Washington`, `West Virginia`, `Wisconsin`, `Wyoming`)
+
+	for i := 0; i < len(x); i++ {
+		fmt.Printf("State %d is %s\n", i, x[i])
+	}
+	fmt.Printf("Slice capacity is %d and length is %d\n", cap(x), len(x))
+}
+
+func exerciseSeven() {
+	x := [][]string{{"James", "Bond", "Shaken not stirred"}, {"Miss", "Monypenny", "Hellooo, James"}}
+
+	for i, ss := range x {
+		fmt.Println("record: ", i)
+		for j, s := range ss {
+			fmt.Printf("Index %d, is Value: %s\n", j, s)
+		}
+	}
 }
 
 // That's All Folks !!
