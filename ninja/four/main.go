@@ -120,12 +120,15 @@ func exerciseEight() {
 		"Explosive stuff",
 	}
 
+	delete(x, "no_dr")
+
 	for k, v := range x {
 		fmt.Printf("Favorite things for: %s\n", k)
 		for i, s := range v {
 			fmt.Printf("\tItem %d: %s\n", i, s)
 		}
 	}
+
 }
 
 // That's All Folks !!
