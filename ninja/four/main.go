@@ -23,6 +23,7 @@ func main() {
 	exerciseFive()
 	exerciseSix()
 	exerciseSeven()
+	exerciseEight()
 }
 
 func exerciseOne() {
@@ -93,6 +94,31 @@ func exerciseSeven() {
 		fmt.Println("record: ", i)
 		for j, s := range ss {
 			fmt.Printf("Index %d, is Value: %s\n", j, s)
+		}
+	}
+}
+
+func exerciseEight() {
+	x := make(map[string][]string)
+	x["bond_james"] = []string{
+		"Shaken, not stirred",
+		"Martinis",
+		"Women"}
+	x["moneypenny_miss"] = []string{
+		"James Bond",
+		"Literature",
+		"Computer Science",
+	}
+	x["no_dr"] = []string{
+		"Being evil",
+		"Ice cream",
+		"Sunsets",
+	}
+
+	for k, v := range x {
+		fmt.Printf("Favorite things for: %s\n", k)
+		for i, s := range v {
+			fmt.Printf("Item %d: %s\n", i, s)
 		}
 	}
 }
