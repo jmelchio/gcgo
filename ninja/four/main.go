@@ -114,11 +114,16 @@ func exerciseEight() {
 		"Ice cream",
 		"Sunsets",
 	}
+	x["M_MI5"] = []string{
+		"Gadgets",
+		"Lab",
+		"Explosive stuff",
+	}
 
 	for k, v := range x {
 		fmt.Printf("Favorite things for: %s\n", k)
 		for i, s := range v {
-			fmt.Printf("Item %d: %s\n", i, s)
+			fmt.Printf("\tItem %d: %s\n", i, s)
 		}
 	}
 }
