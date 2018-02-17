@@ -65,6 +65,12 @@ func main() {
 
 	fmt.Println("It's", funky(42))
 
+	fmt.Printf("Calling all callbacks: %d\n", funkyfunc(funky, someInt))
+
+	bumper := funkierfunc(3)
+	fmt.Printf("Calling bumper once: %d\n", bumper())
+	fmt.Printf("Calling bumper twice: %d\n", bumper())
+
 	fmt.Println("\nThat's all folks !!")
 }
 
@@ -131,5 +137,17 @@ func info(s shape) float64 {
 func somefunc() func(int) int {
 	return func(x int) int {
 		return x
+	}
+}
+
+func funkyfunc(zefunc func(int) int, parm int) int {
+	return zefunc(parm)
+}
+
+func funkierfunc(x int) func() int {
+	ex := x
+	return func() int {
+		ex++
+		return ex
 	}
 }
