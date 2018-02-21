@@ -55,6 +55,7 @@ func main() {
 	sortDemo()
 	marshalPerson()
 	unmarshalToStruct()
+	simpleSort()
 	fmt.Println("That's all for Ninja level eight folks !!")
 }
 
@@ -107,6 +108,19 @@ func unmarshalToStruct() {
 	encoder.Encode(anAddress)
 }
 
+func simpleSort() {
+	xi := []int{5, 8, 2, 43, 17, 987, 14, 12, 21, 1, 4, 2, 3, 93, 13}
+	xs := []string{"random", "rainbow", "delights", "in", "torpedo", "summers", "under", "gallantry", "fragmented", "moons", "across", "magenta"}
+
+	fmt.Println(xi)
+	sort.Ints(xi)
+	fmt.Println(xi)
+
+	fmt.Println(xs)
+	sort.Strings(xs)
+	fmt.Println(xs)
+}
+
 func sortDemo() {
 	p1 := Person{
 		First: "Joris",
@@ -131,9 +145,12 @@ func sortDemo() {
 
 	ps := []Person{p1, p2, p3, p4}
 
+	fmt.Println("\t unsorted ...")
 	fmt.Println(ps)
 	sort.Sort(ByFirst(ps))
+	fmt.Println("\t sorted by first name ...")
 	fmt.Println(ps)
+	fmt.Println("\t sorted by last name ...")
 	sort.Sort(ByLast(ps))
 	fmt.Println(ps)
 }
