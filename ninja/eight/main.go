@@ -100,7 +100,11 @@ func unmarshalToStruct() {
 		fmt.Println("Unable to unmarshal: ", err)
 		return
 	}
+	fmt.Println("\t decode it ...")
 	fmt.Println(anAddress)
+	fmt.Println("\t and encode back again ...")
+	encoder := json.NewEncoder(os.Stdout)
+	encoder.Encode(anAddress)
 }
 
 func sortDemo() {
