@@ -13,6 +13,15 @@ type Person struct {
 	Age   int
 }
 
+type Address struct {
+	StreetOne  string `json:"streetone"`
+	StreetTwo  string `json:"streettwo,omitempty"`
+	PostalCode string `json:"postalcode,omitempty"`
+	City       string `json:"city"`
+	Province   string `json:"province,omitempty"`
+	Country    string `json:"country,omitempty"`
+}
+
 type ByFirst []Person
 
 func (n ByFirst) Len() int {
@@ -44,6 +53,8 @@ func (n ByLast) Less(i, j int) bool {
 func main() {
 	simpleMarshal()
 	sortDemo()
+	marshalPerson()
+	unmarshalToStruct()
 	fmt.Println("That's all for Ninja level eight folks !!")
 }
 
@@ -56,7 +67,40 @@ func simpleMarshal() {
 		os.Stdout.Write(b)
 		os.Stdout.WriteString("\n")
 	}
+}
 
+func marshalPerson() {
+	p1 := Person{
+		First: "John",
+		Last:  "Doe",
+		Age:   19,
+	}
+
+	p2 := Person{
+		First: "Jane",
+		Last:  "Doe",
+		Age:   21,
+	}
+
+	jp, err := json.Marshal([]Person{p1, p2})
+	if err != nil {
+		fmt.Println("Marshal person did not work:", err)
+		return
+	}
+	fmt.Println(string(jp))
+}
+
+func unmarshalToStruct() {
+	address := `{"streetone": "51 Braywin Drive", "city": "Etobicoke", "province": "Ontario", "country": "Canada"}`
+	fmt.Println(address)
+	aba := []byte(address)
+	anAddress := Address{}
+	err := json.Unmarshal(aba, &anAddress)
+	if err != nil {
+		fmt.Println("Unable to unmarshal: ", err)
+		return
+	}
+	fmt.Println(anAddress)
 }
 
 func sortDemo() {
