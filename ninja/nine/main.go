@@ -7,6 +7,16 @@ import (
 	"sync/atomic"
 )
 
+type Person struct {
+	First string
+	Last  string
+	Age   int
+}
+
+type Human interface {
+	Speak(string)
+}
+
 var wg sync.WaitGroup
 
 func main() {
@@ -20,6 +30,14 @@ func main() {
 
 	raceCondition(true)
 	goingNuclear()
+
+	person := Person{
+		First: "John",
+		Last:  "Doe",
+		Age:   21,
+	}
+
+	SaySomething(&person)
 
 	fmt.Println("That's all for Ninja level nine Folks !!")
 
@@ -87,4 +105,12 @@ func goingNuclear() {
 	raceWg.Wait()
 	fmt.Println("GoRoutines:", runtime.NumGoroutine())
 	fmt.Println("Endcount:", counter)
+}
+
+func (p *Person) Speak(word string) {
+	fmt.Println("I say:", p.First, "say", word)
+}
+
+func SaySomething(h Human) {
+	h.Speak("speak human!")
 }
