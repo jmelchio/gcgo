@@ -114,3 +114,9 @@ func (p *Person) Speak(word string) {
 func SaySomething(h Human) {
 	h.Speak("speak human!")
 }
+
+func WhatIsOBS() {
+	fmt.Println("I'm wondering if OBS is Odd BS?")
+}
+
+// That's All Folks !!
