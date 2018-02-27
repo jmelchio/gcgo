@@ -18,6 +18,8 @@ func main() {
 
 	fmt.Println("about to exit two")
 
+	showOkayIdiom()
+
 	fmt.Println("That's all for Ninja level ten folks !!")
 }
 
@@ -93,6 +95,22 @@ func receiveFour(c, q <-chan int) {
 			return
 		}
 	}
+}
+
+func showOkayIdiom() {
+	c := make(chan int)
+
+	go func() {
+		c <- 5
+	}()
+
+	v, ok := <-c
+	fmt.Println(v, ok)
+
+	close(c)
+
+	v, ok = <-c
+	fmt.Println(v, ok)
 }
 
 // That's All Folks !!
