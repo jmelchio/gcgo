@@ -10,7 +10,13 @@ func main() {
 	c := gen()
 	receive(c)
 
-	fmt.Println("about to exit")
+	fmt.Println("about to exit one")
+
+	q := make(chan int)
+	c2 := genFour(q)
+	receiveFour(c2, q)
+
+	fmt.Println("about to exit two")
 
 	fmt.Println("That's all for Ninja level ten folks !!")
 }
@@ -61,6 +67,31 @@ func gen() <-chan int {
 func receive(c <-chan int) {
 	for i := range c {
 		fmt.Println("Int from channel:", i)
+	}
+}
+
+func genFour(q chan<- int) <-chan int {
+	c := make(chan int)
+
+	go func() {
+		for i := 0; i < 100; i++ {
+			c <- i
+		}
+		q <- 1
+		close(c)
+	}()
+
+	return c
+}
+
+func receiveFour(c, q <-chan int) {
+	for {
+		select {
+		case v := <-c:
+			fmt.Println(v)
+		case <-q:
+			return
+		}
 	}
 }
 
