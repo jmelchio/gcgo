@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 func main() {
 	simpleChannel()
@@ -19,6 +22,22 @@ func main() {
 	fmt.Println("about to exit two")
 
 	showOkayIdiom()
+
+	sc := make(chan int)
+	go sendSix(sc, 25)
+	receiveSix(sc)
+
+	sc2 := make(chan int)
+	go receiveSix(sc2)
+	var wg sync.WaitGroup
+	for i := 0; i < 10; i++ {
+		fmt.Println("Kicking of routine:", i)
+		wg.Add(1)
+		go sendSeven(sc2, 5, &wg)
+	}
+	wg.Wait()
+	fmt.Println("WaitGroup is done, closing channel")
+	close(sc2)
 
 	fmt.Println("That's all for Ninja level ten folks !!")
 }
@@ -111,6 +130,38 @@ func showOkayIdiom() {
 
 	v, ok = <-c
 	fmt.Println(v, ok)
+}
+
+func sendSix(sc chan<- int, repeat int) {
+	for i := 0; i < repeat; i++ {
+		sc <- i
+	}
+	close(sc)
+}
+
+func receiveSix(rc <-chan int) {
+	// for {
+	// 	select {
+	// 	case v, ok := <-rc:
+	// 		if !ok {
+	// 			fmt.Println("Received close signal")
+	// 			return
+	// 		}
+	// 		fmt.Println("Received value:", v)
+	// 	}
+	// }
+	// simpler ...
+	for v := range rc {
+		fmt.Println("Received value:", v)
+	}
+	fmt.Println("Done printing...")
+}
+
+func sendSeven(sc chan<- int, repeat int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for i := 0; i < repeat; i++ {
+		sc <- i
+	}
 }
 
 // That's All Folks !!
