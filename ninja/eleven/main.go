@@ -24,10 +24,18 @@ func exerciseOne() {
 		Sayings: []string{"Shaken, not stirred", "Any last wishes?", "Never say never"},
 	}
 
-	bs, err := json.Marshal(p1)
+	bs, err := toJSON(p1)
 	if err != nil {
-		log.Println("An error ocurred:", err)
+		log.Println(err)
 		return
 	}
 	fmt.Println(string(bs))
+}
+
+func toJSON(a interface{}) ([]byte, error) {
+	bs, err := json.Marshal(a)
+	if err != nil {
+		return nil, fmt.Errorf("Some error occurred converting %v into JSON: %v", a, err)
+	}
+	return bs, nil
 }
