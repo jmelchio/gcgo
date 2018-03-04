@@ -20,7 +20,13 @@ type customErr struct {
 }
 
 func main() {
-	exerciseOne()
+	result, err := exerciseOne()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(result)
+	}
+
 	ce := customErr{
 		Stuff:          "stuffy",
 		Morestuff:      "stuffier",
@@ -28,7 +34,7 @@ func main() {
 		Erroneousstuff: "and dead wrong too",
 	}
 
-	err := exerciseThree(ce)
+	err = exerciseThree(ce)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -39,7 +45,8 @@ func main() {
 func (es customErr) Error() string {
 	return fmt.Sprintf("This is extremely wrong %s because %s and %s and also %s", es.Erroneousstuff, es.Stuff, es.Morestuff, es.Evenmorestuff)
 }
-func exerciseOne() {
+
+func exerciseOne() (string, error) {
 	p1 := person{
 		First:   "James",
 		Last:    "Bond",
@@ -49,9 +56,9 @@ func exerciseOne() {
 	bs, err := toJSON(p1)
 	if err != nil {
 		log.Println(err)
-		return
+		return "", err
 	}
-	fmt.Println(string(bs))
+	return string(bs), nil
 }
 
 func exerciseThree(ce customErr) error {
