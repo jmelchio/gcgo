@@ -12,11 +12,33 @@ type person struct {
 	Sayings []string
 }
 
+type customErr struct {
+	Stuff          string
+	Morestuff      string
+	Evenmorestuff  string
+	Erroneousstuff string
+}
+
 func main() {
 	exerciseOne()
+	ce := customErr{
+		Stuff:          "stuffy",
+		Morestuff:      "stuffier",
+		Evenmorestuff:  "stuff to the max",
+		Erroneousstuff: "and dead wrong too",
+	}
+
+	err := exerciseThree(ce)
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	fmt.Println("That's all for Ninja eleven folks !!")
 }
 
+func (es customErr) Error() string {
+	return fmt.Sprintf("This is extremely wrong %s because %s and %s and also %s", es.Erroneousstuff, es.Stuff, es.Morestuff, es.Evenmorestuff)
+}
 func exerciseOne() {
 	p1 := person{
 		First:   "James",
@@ -30,6 +52,13 @@ func exerciseOne() {
 		return
 	}
 	fmt.Println(string(bs))
+}
+
+func exerciseThree(ce customErr) error {
+	if ce.Erroneousstuff != "" {
+		return ce
+	}
+	return nil
 }
 
 func toJSON(a interface{}) ([]byte, error) {
