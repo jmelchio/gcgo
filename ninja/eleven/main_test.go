@@ -25,12 +25,10 @@ func TestExerciseThree(t *testing.T) {
 func TestExerciseOne(t *testing.T) {
 	stuff, err := exerciseOne()
 	if err != nil {
-		t.Log("Did not expect error to be returned:", err)
-		t.Fail()
+		t.Error("Did not expect error to be returned:", err)
 	} else {
 		if stuff != `{"First":"James","Last":"Bond","Sayings":["Shaken, not stirred","Any last wishes?","Never say never"]}` {
-			t.Log("Did not get expected string:", stuff)
-			t.Fail()
+			t.Error("Did not get expected string:", stuff)
 		}
 	}
 }
